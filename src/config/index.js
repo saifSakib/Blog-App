@@ -49,7 +49,10 @@ const getGlobalConfig=()=>{
 const initEnvVariables=()=>{
     const secrets = {
         PORT:"5000",
-        COOKIE_SECRET:"cookie-secret"
+        COOKIE_SECRET:"cookie-secret",
+        DB_USERNAME:"root",
+        DB_PASSWORD:"",
+        DB_HOST:"localhost"
     }
     for (let key in secrets){
         nodeCache.setValue(key,secrets[key])

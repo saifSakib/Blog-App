@@ -12,8 +12,10 @@ added packeges
     node-cache 
     nodemon 
     express
+    mysql2
+    sequelize
 
 scripts
-    -start: nodemon --legacy-watch server.js,
-    -seed": node seeder.js"
+    start: nodemon --legacy-watch server.js,
+    seed": node seeder.js"
 
