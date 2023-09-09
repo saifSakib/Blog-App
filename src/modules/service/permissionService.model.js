@@ -2,6 +2,7 @@ const path = require("path");
 const { DataTypes } = require("sequelize");
 const sequelize = require(path.join(process.cwd(),'src/config/lib/sequelize.js'));
 
+const Service = require(path.join(process.cwd(),"src/modules/service/service.model.js"))
 const PermissionService = sequelize.define(
     'permission-services',
     {
@@ -32,4 +33,5 @@ const PermissionService = sequelize.define(
     }
 );
 
+PermissionService.belongsTo(Service,{foreignKey:"service_id",as:"service"});
 module.exports = PermissionService;

@@ -2,6 +2,7 @@ const path = require("path");
 const { DataTypes } = require("sequelize");
 const sequelize = require(path.join(process.cwd(),'src/config/lib/sequelize.js'));
 
+const Profile = require(path.join(process.cwd(),"src/modules/profile/profile.model.js"))
 const User = sequelize.define(
     'users',
     {
@@ -35,4 +36,5 @@ const User = sequelize.define(
     }
 );
 
+User.belongsTo(Profile,{foreignKey:"profile_id",as:"profile"});
 module.exports = User;

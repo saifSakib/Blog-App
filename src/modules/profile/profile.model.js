@@ -2,6 +2,7 @@ const path = require("path");
 const { DataTypes } = require("sequelize");
 const sequelize = require(path.join(process.cwd(),'src/config/lib/sequelize.js'));
 
+const ProfilePermission = require(path.join(process.cwd(),"src/modules/permission/profilePermission.model.js"))
 const Profile = sequelize.define(
     'profiles',
     {
@@ -29,4 +30,5 @@ const Profile = sequelize.define(
     }
 );
 
+Profile.hasMany(ProfilePermission,{foreignKey:"profile_id",as:"profile_permissions"});
 module.exports = Profile;
