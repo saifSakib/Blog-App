@@ -11,7 +11,10 @@ added packeges
     glob 
     node-cache 
     nodemon 
-    express
+    express,
+    async,
+    mysql2,
+    sequelize
 
 scripts
     -start: nodemon --legacy-watch server.js,
