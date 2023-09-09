@@ -1,7 +1,7 @@
 const path = require("path")
 const { DataTypes } = require("sequelize")
 const sequelize = require(path.join(process.cwd(),"src/config/lib/sequelize"))
-const USER = sequelize.define(
+const User = sequelize.define(
     "users",
     {
         id:{
@@ -36,4 +36,4 @@ const USER = sequelize.define(
     }
 );
 
-module.exports.USER= USER;
+module.exports = User;

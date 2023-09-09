@@ -42,7 +42,8 @@ function getGlobbedPaths(globPatterns, excludes) {
 const getGlobalConfig=()=>{
     const assets = require(path.join(process.cwd(),"src/config/assets/defaults"));
     const config = {
-        routes:getGlobbedPaths(assets.routes)
+        routes:getGlobbedPaths(assets.routes),
+		strategies:getGlobbedPaths(assets.strategies)
     };
     return config;
 }
@@ -52,7 +53,8 @@ const initEnvVariables=()=>{
         COOKIE_SECRET:"cookie-secret",
         DB_USERNAME:"root",
         DB_PASSWORD:"",
-        DB_HOST:"localhost"
+        DB_HOST:"localhost",
+		TOKEN_SECRET:"1234asdf"
     }
     for (let key in secrets){
         nodeCache.setValue(key,secrets[key])
