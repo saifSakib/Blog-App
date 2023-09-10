@@ -1,7 +1,7 @@
 const _ = require("lodash");
 const path = require("path");
 const glob = require("glob");
-const nodeCache = require(path.join(process.cwd(),"src/config/lib/nodeCache"))
+const nodeCache = require(path.join(process.cwd(),"src/config/lib/nodeCache.js"))
 
 // globPatterns = ["src/modules/admin/admin.routes.js"], excludes = undefined
 function getGlobbedPaths(globPatterns, excludes) {
@@ -51,7 +51,7 @@ const initEnvVariables=()=>{
     const secrets = {
         PORT:"5000",
         COOKIE_SECRET:"cookie-secret",
-        TOKEN_SECRET:"token-secret",
+        JWT_SECRET:"token-secret",
     }
     for (let key in secrets){
         nodeCache.setValue(key,secrets[key])

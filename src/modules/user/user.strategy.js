@@ -15,22 +15,23 @@ module.exports = () => {
     }
     
     passport.use(
-        "user-token",
-        new Strategy({secretOrKey:nodeCache.getValue("COOKIE_SECRET"),jwtFromRequest:cookieExtractor}),
-        async(payload,done)=>{
-            const user = await User.findOne({
-                where:{
-                    id:payload.id
-                }
-            });
+        "jwt-token",
+        new Strategy(
+            {secretOrKey:nodeCache.getValue("JWT_SECRET"),jwtFromRequest:cookieExtractor},
+            async(payload,done)=>{
+                const user = await User.findOne({
+                    where:{
+                        id:payload.id
+                    }
+                });
 
-            if (user) {
-                return done(null,user);
+                if (user) {
+                    return done(null,user);
+                }
+                return done(null,false)    
             }
-            return done(null,false)    
-        }
+        ),
+        
 
     );   
 }
-
-module.exports 
