@@ -14,7 +14,9 @@ added packeges
     express,
     async,
     mysql2,
-    sequelize
+    sequelize,
+    jsonwebtoken,
+    passport
 
 scripts
     -start: nodemon --legacy-watch server.js,

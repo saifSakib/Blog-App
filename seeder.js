@@ -4,7 +4,7 @@ const async = require('async');
 const init = async()=> {
     const sequelize = require(path.join(process.cwd(),"src/config/lib/sequelize.js"));
     const config = require(path.join(process.cwd(),"src/config/index.js"));
-    // config.initEnvVariables()
+    await config.initEnvVariables()
     
     const User = require(path.join(process.cwd(),"src/modules/user/user.model.js")); 
     const Profile = require(path.join(process.cwd(),"src/modules/profile/profile.model.js")); 
@@ -165,48 +165,6 @@ const init = async()=> {
             
         })
     }
-
-    // const testRelation = (callback)=> {
-    //     User.findOne({
-    //         where:{
-    //             email:"saif.sakib42011@gmail.com"
-    //         },
-    //         include:[
-    //             {
-    //                 model:Profile,
-    //                 as:"profile",
-    //                 include:[
-    //                     {
-    //                         model:ProfilePermission,
-    //                         as:"profile_permissions",
-    //                         include:[
-    //                             {
-    //                                 model:Permission,
-    //                                 as:"permission",
-    //                                 include:[
-    //                                     {
-    //                                         model:PermissionService,
-    //                                         as:"permission_services",
-    //                                         include:[
-    //                                             {
-    //                                                 model:Service,
-    //                                                 as:"service"
-    //                                             }
-    //                                         ]
-    //                                     }
-    //                                 ]
-    //                             }    
-    //                         ]
-    //                     }
-    //                 ]
-    //             }
-    //         ]
-    //     })
-    //     .then(admin=>{
-    //         console.log(JSON.stringify(admin));
-    //         callback()
-    //     })
-    // }
     
     async.waterfall([userSeeder,profileSeeder,userUpdateSeeder,permissionSeeder,serviceSeeder,profilePermissionSeeder,permissionServiceSeeder],(err)=>{
         if (err) {
