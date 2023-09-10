@@ -16,7 +16,7 @@ const signin = async (req,res) => {
         }
         
         const token = generateAccessToken(user)
-        res.cookie('access_token', token, { httpOnly: true, signed:true });
+        res.cookie('access_token', generateAccessToken(user), { httpOnly: true, signed:true });
     
         return res.status(200).json({access_token:token})
     } catch (error) {

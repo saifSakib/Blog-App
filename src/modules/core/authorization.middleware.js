@@ -1,7 +1,12 @@
 const path = require("path");
 
 const User = require(path.join(process.cwd(),"src/modules/user/user.model.js")); 
-
+const Profile = require(path.join(process.cwd(),"src/modules/profile/profile.model.js")); 
+const Permission = require(path.join(process.cwd(),"src/modules/permission/permission.model.js"));
+const ProfilePermission = require(path.join(process.cwd(),"src/modules/permission/profilePermission.model.js")); 
+const Service = require(path.join(process.cwd(),"src/modules/service/service.model.js")); 
+const PermissionService = require(path.join(process.cwd(),"src/modules/service/permissionService.model.js")); 
+    
 const getUserServices = async(id)=> {
     const user = await User.findOne({
         where:{
@@ -51,10 +56,19 @@ const getUserServices = async(id)=> {
     return service
 }
 
+const isPermitted = (userServices=[],allowedServices=[])=> {
+    if (userServices.some(userservice=>allowedServices.includes(userservice.slug))){
+        return true
+    }
+    return false 
+}
 module.exports.ServiceGuard = (allowedServices)=> {
-    return function (req,res,next){
-        const UserServices = getUserServices(req.user.id);
-        console.log(UserServices);
-        next()
+    return async function (req,res,next){
+        const UserServices = await getUserServices(req.user.id);
+        if (isPermitted(UserServices,allowedServices)) {
+            next()
+        }else{
+            return res.status(403).send("Forbidden. You are not authorized.");
+        }
     }
 }

@@ -17,6 +17,8 @@ added packeges
     sequelize,
     jsonwebtoken,
     passport
+    passport-jwt
+    dotenv
 
 scripts
     -start: nodemon --legacy-watch server.js,

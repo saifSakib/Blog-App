@@ -14,12 +14,11 @@ module.exports=()=>{
     const globalConfig = config.getGlobalConfig();
     
     globalConfig.routes.forEach(route => {
-        // console.log(route);
         require(path.join(process.cwd(),route))(app)
     });
     
     globalConfig.strategies.forEach(strategy => {
-        // require(path.join(process.cwd(),strategy))()
+        require(path.join(process.cwd(),strategy))()
     });
     
     return app

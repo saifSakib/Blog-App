@@ -1,7 +1,6 @@
 const _ = require("lodash");
 const path = require("path");
 const glob = require("glob");
-const nodeCache = require(path.join(process.cwd(),"src/config/lib/nodeCache.js"))
 
 // globPatterns = ["src/modules/admin/admin.routes.js"], excludes = undefined
 function getGlobbedPaths(globPatterns, excludes) {
@@ -48,14 +47,20 @@ const getGlobalConfig=()=>{
     return config;
 }
 const initEnvVariables=()=>{
+	require("dotenv").config();
+	const nodeCache = require(path.join(process.cwd(),"src/config/lib/nodeCache.js"))
     const secrets = {
-        PORT:"5000",
-        COOKIE_SECRET:"cookie-secret",
-        JWT_SECRET:"token-secret",
+        PORT:process.env.PORT,
+        COOKIE_SECRET:process.env.COOKIE_SECRET,
+        TOKEN_SECRET:process.env.TOKEN_SECRET,
     }
     for (let key in secrets){
-        nodeCache.setValue(key,secrets[key])
+        nodeCache.setValue(key,secrets[key]);
     }
+	// console.log("jwt====================",nodeCache.getValue("TOKEN_SECRET"));
+	// console.log("cookie sec====================",nodeCache.getValue("COOKIE_SECRET"));
+	// console.log("Port====================",nodeCache.getValue("PORT"));
+
 }
 
 module.exports.getGlobalConfig=getGlobalConfig;
