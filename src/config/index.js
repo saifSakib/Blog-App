@@ -57,9 +57,9 @@ const initEnvVariables=()=>{
     for (let key in secrets){
         nodeCache.setValue(key,secrets[key]);
     }
-	// console.log("jwt====================",nodeCache.getValue("TOKEN_SECRET"));
-	// console.log("cookie sec====================",nodeCache.getValue("COOKIE_SECRET"));
-	// console.log("Port====================",nodeCache.getValue("PORT"));
+	console.log("jwt====================",nodeCache.getValue("TOKEN_SECRET"));
+	console.log("cookie sec====================",nodeCache.getValue("COOKIE_SECRET"));
+	console.log("Port====================",nodeCache.getValue("PORT"));
 
 }
 
