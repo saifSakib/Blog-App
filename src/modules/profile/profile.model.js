@@ -30,5 +30,5 @@ const Profile = sequelize.define(
     }
 );
 
-Profile.hasMany(ProfilePermission,{foreignKey:"profile_id",as:"profile_permissions"});
+Profile.hasMany(ProfilePermission,{foreignKey:"profile_id",as:"profile_permissions",constraint:true});
 module.exports = Profile;
